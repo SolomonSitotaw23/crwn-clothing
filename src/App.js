@@ -2,15 +2,8 @@ import React from "react";
 import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ShopPage from "./shop/shop.component";
 
-const HatsPage = () => <div>Hats Page</div>;
-const Topic = (props) => {
-  return (
-    <div>
-      <h1>Topic{props.match.params.topicId}</h1>
-    </div>
-  );
-};
 
 function App(props) {
   console.log(props);
@@ -18,8 +11,8 @@ function App(props) {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/hats" element={<HatsPage />} />
-        <Route exact path="/topics/:topicId" element={<Topic />} />
+        <Route path="/shop" element={<ShopPage />} />
+        
       </Routes>
     </Router>
   );

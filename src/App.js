@@ -14,6 +14,9 @@ import { auth, createUserProfileDocument } from "./firebse/firebse.utils";
 //redux
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.action";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
+import CheckOutPage from "./pages/check-out/check-out.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -43,6 +46,8 @@ class App extends React.Component {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route exact path="/checkout" element={<CheckOutPage />} />
+
           <Route
             exact
             path="/signin"
@@ -59,8 +64,8 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps =createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,6 +8,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import ShopPage from "./shop/shop.component";
+import CollectionPage from "./pages/collection/collection.component";
+
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/signin-and-signup/signin-and-signup.component";
 import { auth, createUserProfileDocument } from "./firebse/firebse.utils";
@@ -47,7 +49,7 @@ class App extends React.Component {
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route exact path="/checkout" element={<CheckOutPage />} />
-
+          <Route path="/shop/:collectionId" element={<CollectionPage />} />
           <Route
             exact
             path="/signin"
@@ -64,7 +66,7 @@ class App extends React.Component {
     );
   }
 }
-const mapStateToProps =createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 

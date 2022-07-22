@@ -3,8 +3,7 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { auth, createUserProfileDocument } from "../../firebse/firebse.utils";
 
-import "./sign-up.styles.scss";
-
+import { SignUpContainer, SignUpTitle } from "./sign-up.style";
 class SignUp extends React.Component {
   constructor() {
     super();
@@ -42,12 +41,12 @@ class SignUp extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-  
+
   render() {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
-      <div className="sign-up">
-        <h2 className="title">I do not have an account</h2>
+      <SignUpContainer>
+        <SignUpTitle>I do not have an account</SignUpTitle>
         <span>Sign up</span>
         <form className="sign-up-form" onSubmit={this.handelSubmit}>
           <FormInput
@@ -84,7 +83,7 @@ class SignUp extends React.Component {
           />
           <CustomButton type="submit">Sign Up</CustomButton>
         </form>
-      </div>
+      </SignUpContainer>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import CollectionItem from "../collection-item/collection-item";
+import { Link } from "react-router-dom";
 
 import {
   CollectionPreviewContainer,
@@ -7,9 +8,11 @@ import {
   PreviewContainer,
 } from "./collection-preview.style";
 
-const CollectionPreview = ({ title, items, addItem }) => (
+const CollectionPreview = ({ title, items, routeName, addItem }) => (
   <CollectionPreviewContainer>
-    <TitleContainer>{title.toUpperCase()}</TitleContainer>
+    <TitleContainer>
+      <Link to={`${routeName}`}>{title.toUpperCase()} </Link>
+    </TitleContainer>
 
     <PreviewContainer>
       {items

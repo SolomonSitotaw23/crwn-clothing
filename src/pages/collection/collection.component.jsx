@@ -12,8 +12,6 @@ import { useParams } from "react-router-dom";
 
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
-  const { collectionId } = useParams();
-  console.log(collectionId);
   selectCollection();
   return (
     <CollectionPageContainer>
@@ -27,7 +25,13 @@ const CollectionPage = ({ collection }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  collection: selectCollection("mens")(state),
-});
-export default connect(mapStateToProps)(CollectionPage);
+const MakeMapStateToProps = () => {
+  const { collectionId } = useParams();
+
+  const mapStateToProps = (state, props) => ({
+    collection: selectCollection(collectionId)(state),
+  });
+  return mapStateToProps;
+};
+
+export default connect(MakeMapStateToProps)(CollectionPage);

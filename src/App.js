@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import {
@@ -19,39 +19,28 @@ import { checkUserSession } from "./redux/user/user.action";
 import { createStructuredSelector } from "reselect";
 import CheckOutPage from "./pages/check-out/check-out.component";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+const App = ({ checkUserSession, currentUser }) => {
+  useEffect(() => {
     checkUserSession();
-  }
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
-  render() {
-    return (
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="shop/*" element={<ShopPage />} />
-          <Route exact path="checkout" element={<CheckOutPage />} />
-          <Route
-            exact
-            path="signin"
-            element={
-              this.props.currentUser ? (
-                <Navigate to="/" />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-        </Routes>
-      </Router>
-    );
-  }
-}
+  }, [checkUserSession]);
+
+  return (
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="shop/*" element={<ShopPage />} />
+        <Route exact path="checkout" element={<CheckOutPage />} />
+        <Route
+          exact
+          path="signin"
+          element={currentUser ? <Navigate to="/" /> : <SignInAndSignUpPage />}
+        />
+      </Routes>
+    </Router>
+  );
+};
+
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
